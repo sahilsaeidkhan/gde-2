@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Video, ChevronRight } from 'lucide-react';
@@ -5,25 +6,25 @@ import { Video, ChevronRight } from 'lucide-react';
 const mockMeetingSummaries = [
   {
     id: 1,
-    title: 'Q1 Planning Session',
-    summary: 'Discussed quarterly objectives and resource allocation. Team committed to launching 3 new features.',
-    achievements: 'Finalized roadmap, assigned team leads',
+    title: 'Q1 Planning',
+    summary: 'Discussed quarterly objectives and resource allocation.',
+    achievements: '3 new features',
     duration: '1h 30m',
-    time: 'Today at 10:00 AM',
+    time: 'Today',
   },
   {
     id: 2,
-    title: 'Backend Architecture Review',
-    summary: 'Reviewed microservices implementation. Decided to migrate to event-driven architecture.',
-    achievements: 'Architecture approved, timeline set',
+    title: 'Architecture Review',
+    summary: 'Reviewed microservices. Approved event-driven architecture.',
+    achievements: 'Architecture approved',
     duration: '45m',
-    time: 'Yesterday at 2:00 PM',
+    time: 'Yesterday',
   },
   {
     id: 3,
     title: 'Client Presentation',
-    summary: 'Presented new dashboard features. Client approved Phase 2 features and signed off on budget.',
-    achievements: 'Client approval, Budget approved',
+    summary: 'Presented dashboard features and Phase 2 roadmap.',
+    achievements: 'Client approved',
     duration: '2h',
     time: '2 days ago',
   },
@@ -31,50 +32,53 @@ const mockMeetingSummaries = [
 
 export function MeetingSummaries() {
   return (
-    <Card className="col-span-1 md:col-span-1 row-span-2">
+    <Card className="h-full">
       <div className="mb-6">
-        <h3 className="text-xl font-bold flex items-center gap-2">
-          <Video className="w-5 h-5 text-synchub-blue" />
-          Recent Summaries
+        <h3 className="text-xl font-bold flex items-center gap-2 text-white">
+          <Video className="w-5 h-5 text-cyber-blue" />
+          Meet Summaries
         </h3>
-        <p className="text-sm text-synchub-grey-light mt-1">AI-generated meeting insights</p>
+        <p className="text-sm text-cyber-grey-light mt-1">AI-generated insights</p>
       </div>
 
-      <div className="space-y-4">
-        {mockMeetingSummaries.map((meeting) => (
-          <div
+      <div className="space-y-3 max-h-96 overflow-y-auto">
+        {mockMeetingSummaries.map((meeting, idx) => (
+          <motion.div
             key={meeting.id}
-            className="p-4 bg-synchub-black bg-opacity-50 hover:bg-opacity-70 rounded-lg transition-colors group cursor-pointer"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.05 }}
+            className="p-3 bg-cyber-charcoal/50 hover:bg-cyber-blue hover:bg-opacity-10 rounded-lg transition-colors group cursor-pointer border border-cyber-blue border-opacity-10 hover:border-opacity-30"
           >
             <div className="flex items-start justify-between gap-2 mb-2">
-              <h4 className="font-medium text-white group-hover:text-synchub-blue transition-colors">
+              <h4 className="font-medium text-white group-hover:text-cyber-blue transition-colors text-sm">
                 {meeting.title}
               </h4>
-              <ChevronRight className="w-4 h-4 text-synchub-grey flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="w-4 h-4 text-cyber-grey flex-shrink-0 group-hover:translate-x-1 transition-transform" />
             </div>
 
-            <p className="serif text-sm text-synchub-grey-light leading-relaxed mb-3">
+            <p className="serif text-xs text-cyber-grey-light leading-relaxed mb-2">
               {meeting.summary}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-3">
-              <Badge variant="success" size="sm">
-                ✓ {meeting.achievements}
-              </Badge>
-            </div>
-
-            <div className="flex items-center justify-between text-xs text-synchub-grey">
-              <span>{meeting.duration}</span>
+            <div className="flex items-center justify-between text-xs text-cyber-grey">
+              <span className="px-2 py-0.5 bg-cyber-blue bg-opacity-10 text-cyber-blue rounded">
+                {meeting.achievements}
+              </span>
               <span>{meeting.time}</span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
       {/* View All */}
-      <button className="mt-6 w-full py-2 px-4 bg-synchub-card hover:bg-synchub-grey hover:bg-opacity-10 rounded-lg text-synchub-blue font-medium transition-colors">
-        See All Meetings →
-      </button>
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="mt-6 w-full py-2 px-4 bg-cyber-blue bg-opacity-10 hover:bg-opacity-20 rounded-lg text-cyber-blue font-medium transition-colors border border-cyber-blue border-opacity-20"
+      >
+        Sync Meet →
+      </motion.button>
     </Card>
   );
 }

@@ -8,16 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'synchub': {
+        'cyber': {
           'black': '#000000',
-          'card': '#121212',
+          'charcoal': '#121212',
+          'dark': '#0a0a0a',
           'blue': '#007AFF',
-          'blue-light': '#E3F2FD',
           'blue-hover': '#0056B3',
-          'blue-glow': 'rgba(0, 122, 255, 0.2)',
+          'blue-glow': 'rgba(0, 122, 255, 0.15)',
           'grey': '#808080',
-          'grey-light': '#B0B0B0',
-          'grey-lighter': '#E0E0E0',
+          'grey-light': '#A0A0A0',
+          'grey-lighter': '#D0D0D0',
         },
       },
       fontSize: {

@@ -3,7 +3,7 @@ import { Sidebar } from './Sidebar';
 
 export function AppShell({ children, title = 'SyncHub', onLogout = () => {} }) {
   return (
-    <div className="min-h-screen bg-synchub-black">
+    <div className="min-h-screen bg-cyber-black">
       <Sidebar />
       <Header title={title} onLogout={onLogout} />
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { AppShell } from '../components/layout/AppShell';
-import { GitHubFeed } from '../components/dashboard/GitHubFeed';
-import { MeetingSummaries } from '../components/dashboard/MeetingSummaries';
-import { QuickStats } from '../components/dashboard/QuickStats';
-import { SyncIndicator } from '../components/dashboard/SyncIndicator';
+import { motion } from 'framer-motion';
+import { AppShell } from '../../components/layout/AppShell';
+import { GitHubFeed } from '../../components/dashboard/GitHubFeed';
+import { MeetingSummaries } from '../../components/dashboard/MeetingSummaries';
+import { NotionIntegration } from '../../components/dashboard/NotionIntegration';
+import { SyncIndicator } from '../../components/dashboard/SyncIndicator';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -36,10 +37,10 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-synchub-black flex items-center justify-center">
+      <div className="min-h-screen bg-cyber-black flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-2 border-synchub-blue border-opacity-30 border-t-synchub-blue rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-synchub-grey-light">Loading SyncHub...</p>
+          <div className="w-12 h-12 border-2 border-cyber-blue border-opacity-30 border-t-cyber-blue rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-cyber-grey-light">Loading SyncHub...</p>
         </div>
       </div>
     );
@@ -51,15 +52,65 @@ export default function Dashboard() {
 
   return (
     <AppShell title="Dashboard" onLogout={handleLogout}>
-      {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
-        <GitHubFeed />
-        <MeetingSummaries />
-        <QuickStats />
+      {/* Animated Gradient Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyber-blue opacity-5 rounded-full mix-blend-multiply filter blur-3xl animate-float"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyber-blue opacity-3 rounded-full mix-blend-multiply filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      {/* Sync Indicator */}
-      <SyncIndicator />
+      {/* Bento Grid Layout */}
+      <div className="relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
+          {/* GitHub Feed - Large Card (Col 1-2, Row 1-2) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-2 row-span-2"
+          >
+            <GitHubFeed />
+          </motion.div>
+
+          {/* Quick Stats - Tall Card (Col 3, Row 1-2) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="row-span-2"
+          >
+            <QuickStats />
+          </motion.div>
+
+          {/* Google Meet - Medium Card (Col 1, Row 3) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <MeetingSummaries />
+          </motion.div>
+
+          {/* Notion Integration - Medium Card (Col 2-3, Row 3) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="md:col-span-2"
+          >
+            <NotionIntegration />
+          </motion.div>
+        </div>
+
+        {/* Sync Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-8"
+        >
+          <SyncIndicator />
+        </motion.div>
+      </div>
     </AppShell>
   );
 }

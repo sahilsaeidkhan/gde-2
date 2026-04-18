@@ -26,7 +26,7 @@ export default function SettingsPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Settings</h1>
-        <p className="text-synchub-grey-light">Manage your SyncHub preferences</p>
+        <p className="text-cyber-grey-light">Manage your SyncHub preferences</p>
       </div>
 
       {/* Settings Sections */}
@@ -34,7 +34,7 @@ export default function SettingsPage() {
         {/* Account Settings */}
         <Card>
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-            <Lock className="w-5 h-5 text-synchub-blue" />
+            <Lock className="w-5 h-5 text-cyber-blue" />
             Account
           </h3>
 
@@ -52,7 +52,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Google Account</p>
-                <p className="text-sm text-synchub-grey-light">Connected via OAuth</p>
+                <p className="text-sm text-cyber-grey-light">Connected via OAuth</p>
               </div>
               <Badge variant="success">✓ Connected</Badge>
             </div>
@@ -66,7 +66,7 @@ export default function SettingsPage() {
         {/* Notifications */}
         <Card>
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-            <Bell className="w-5 h-5 text-synchub-blue" />
+            <Bell className="w-5 h-5 text-cyber-blue" />
             Notifications
           </h3>
 
@@ -74,7 +74,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Email Notifications</p>
-                <p className="text-sm text-synchub-grey-light">Get daily standup reminders</p>
+                <p className="text-sm text-cyber-grey-light">Get daily standup reminders</p>
               </div>
               <input
                 type="checkbox"
@@ -87,7 +87,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Meeting Summaries</p>
-                <p className="text-sm text-synchub-grey-light">Notify when new summaries are ready</p>
+                <p className="text-sm text-cyber-grey-light">Notify when new summaries are ready</p>
               </div>
               <input type="checkbox" defaultChecked className="w-5 h-5 cursor-pointer" />
             </div>
@@ -95,7 +95,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Weekly Reports</p>
-                <p className="text-sm text-synchub-grey-light">Send weekly productivity reports</p>
+                <p className="text-sm text-cyber-grey-light">Send weekly productivity reports</p>
               </div>
               <input type="checkbox" defaultChecked className="w-5 h-5 cursor-pointer" />
             </div>
@@ -105,7 +105,7 @@ export default function SettingsPage() {
         {/* Integrations */}
         <Card>
           <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-            <Zap className="w-5 h-5 text-synchub-blue" />
+            <Zap className="w-5 h-5 text-cyber-blue" />
             Integrations
           </h3>
 
@@ -113,7 +113,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">GitHub</p>
-                <p className="text-sm text-synchub-grey-light">Auto-sync your activity</p>
+                <p className="text-sm text-cyber-grey-light">Auto-sync your activity</p>
               </div>
               <Badge variant="success">✓ Enabled</Badge>
             </div>
@@ -121,7 +121,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Google Meet</p>
-                <p className="text-sm text-synchub-grey-light">Capture meeting summaries</p>
+                <p className="text-sm text-cyber-grey-light">Capture meeting summaries</p>
               </div>
               <Badge variant="success">✓ Enabled</Badge>
             </div>
@@ -129,7 +129,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Slack</p>
-                <p className="text-sm text-synchub-grey-light">Send daily standups to Slack</p>
+                <p className="text-sm text-cyber-grey-light">Send daily standups to Slack</p>
               </div>
               <Button variant="ghost" size="sm">Connect</Button>
             </div>
@@ -143,7 +143,7 @@ export default function SettingsPage() {
           <div className="space-y-3">
             <div>
               <p className="font-medium mb-2">Delete Account</p>
-              <p className="text-sm text-synchub-grey-light mb-4">
+              <p className="text-sm text-cyber-grey-light mb-4">
                 Permanently delete your account and all associated data
               </p>
               <Button variant="danger" size="sm">
