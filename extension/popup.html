@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDE - Meeting Summarizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>GDE Meeting Summarizer</h1>
+            <p class="subtitle">Google Meet Integration</p>
+        </div>
+
+        <!-- Status Section -->
+        <div class="status-section">
+            <div id="statusIndicator" class="status-indicator status-idle">
+                <span id="statusText">Waiting for Google Meet...</span>
+            </div>
+        </div>
+
+        <!-- Meeting Info Section -->
+        <div id="meetingInfo" class="meeting-info" style="display: none;">
+            <div class="meeting-url">
+                <strong>Meeting:</strong>
+                <p id="meetingUrl"></p>
+            </div>
+        </div>
+
+        <!-- Transcript Display Section -->
+        <div class="transcript-section">
+            <h3>Captured Transcript</h3>
+            <textarea
+                id="transcriptArea"
+                class="transcript-area"
+                placeholder="Captions will appear here as the meeting progresses..."
+                readonly
+            ></textarea>
+            <div class="transcript-actions">
+                <button id="copyBtn" class="btn btn-secondary" title="Copy transcript">
+                    📋 Copy
+                </button>
+                <button id="clearBtn" class="btn btn-secondary" title="Clear transcript">
+                    🗑️ Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- Actions Section -->
+        <div class="actions-section">
+            <button id="submitBtn" class="btn btn-primary" disabled>
+                📤 Send to Dashboard
+            </button>
+            <button id="openDashboardBtn" class="btn btn-secondary">
+                🖥️ Open Dashboard
+            </button>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message"></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <small>GDE v1.0.0</small>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

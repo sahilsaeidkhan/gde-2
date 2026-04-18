@@ -1,0 +1,27 @@
+{
+  "name": "synchub-frontend",
+  "version": "2.0.0",
+  "description": "SyncHub - Premium Productivity Dashboard",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next": "^14.0.0",
+    "axios": "^1.6.0",
+    "lucide-react": "^0.292.0",
+    "clsx": "^2.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.6",
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.50.0",
+    "eslint-config-next": "^14.0.0"
+  }
+}
