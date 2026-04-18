@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import { AppShell } from '../../components/layout/AppShell';
 import { Card } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/Badge';
@@ -49,7 +50,7 @@ export default function Meetings() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Meeting History</h1>
-        <p className="text-synchub-grey-light">All your meeting summaries and transcripts</p>
+        <p className="text-cyber-grey-light">All your meeting summaries and transcripts</p>
       </div>
 
       {/* Search */}
@@ -74,10 +75,10 @@ export default function Meetings() {
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <Video className="w-5 h-5 text-synchub-blue" />
+                  <Video className="w-5 h-5 text-cyber-blue" />
                   <h3 className="text-lg font-bold text-white">{meeting.title}</h3>
                 </div>
-                <p className="text-sm text-synchub-grey-light">
+                <p className="text-sm text-cyber-grey-light">
                   {new Date(meeting.date).toLocaleDateString()} • {meeting.duration}
                 </p>
               </div>
@@ -90,19 +91,19 @@ export default function Meetings() {
             </div>
 
             {/* Summary */}
-            <p className="serif text-synchub-grey-light mb-4 leading-relaxed">
+            <p className="serif text-cyber-grey-light mb-4 leading-relaxed">
               {meeting.summary}
             </p>
 
             {/* Expandable Content */}
             {expandedId === meeting.id && (
-              <div className="border-t border-synchub-grey-lighter border-opacity-20 pt-4 mt-4 space-y-4 animate-slide-down">
+              <div className="border-t border-cyber-grey-lighter border-opacity-20 pt-4 mt-4 space-y-4 animate-slide-down">
                 {meeting.achievements.length > 0 && (
                   <div>
                     <h4 className="font-semibold text-green-400 mb-2">✓ Achievements</h4>
                     <ul className="space-y-1">
                       {meeting.achievements.map((item, i) => (
-                        <li key={i} className="text-sm text-synchub-grey-light">• {item}</li>
+                        <li key={i} className="text-sm text-cyber-grey-light">• {item}</li>
                       ))}
                     </ul>
                   </div>
@@ -113,7 +114,7 @@ export default function Meetings() {
                     <h4 className="font-semibold text-amber-400 mb-2">⚠️ Blockers</h4>
                     <ul className="space-y-1">
                       {meeting.blockers.map((item, i) => (
-                        <li key={i} className="text-sm text-synchub-grey-light">• {item}</li>
+                        <li key={i} className="text-sm text-cyber-grey-light">• {item}</li>
                       ))}
                     </ul>
                   </div>
@@ -121,10 +122,10 @@ export default function Meetings() {
 
                 {meeting.nextSteps.length > 0 && (
                   <div>
-                    <h4 className="font-semibold text-synchub-blue mb-2">📋 Next Steps</h4>
+                    <h4 className="font-semibold text-cyber-blue mb-2">📋 Next Steps</h4>
                     <ul className="space-y-1">
                       {meeting.nextSteps.map((item, i) => (
-                        <li key={i} className="text-sm text-synchub-grey-light">• {item}</li>
+                        <li key={i} className="text-sm text-cyber-grey-light">• {item}</li>
                       ))}
                     </ul>
                   </div>
@@ -137,8 +138,8 @@ export default function Meetings() {
 
       {filteredMeetings.length === 0 && (
         <Card className="text-center py-12">
-          <p className="text-synchub-grey-light mb-4">No meetings found</p>
-          <p className="text-sm text-synchub-grey">Try adjusting your search</p>
+          <p className="text-cyber-grey-light mb-4">No meetings found</p>
+          <p className="text-sm text-cyber-grey">Try adjusting your search</p>
         </Card>
       )}
     </AppShell>

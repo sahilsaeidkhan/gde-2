@@ -12,7 +12,7 @@ export function Header({ title = 'SyncHub', onLogout = () => {} }) {
   };
 
   return (
-    <header className="fixed top-0 right-0 left-0 lg:left-64 h-16 bg-synchub-card border-b border-synchub-grey-lighter border-opacity-20 glass z-20">
+    <header className="fixed top-0 right-0 left-0 lg:left-64 h-16 bg-cyber-charcoal/80 backdrop-blur-md border-b border-cyber-blue border-opacity-20 z-20">
       <div className="h-full px-6 flex items-center justify-between">
         {/* Title/Breadcrumb */}
         <div className="hidden lg:block">
@@ -23,9 +23,9 @@ export function Header({ title = 'SyncHub', onLogout = () => {} }) {
         <div className="flex items-center gap-4 ml-auto">
           {/* Sync Indicator */}
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-synchub-blue rounded-full animate-pulse-blue" />
-            <span className="text-xs text-synchub-grey-light hidden sm:inline">
-              Syncing...
+            <div className="w-2 h-2 bg-cyber-blue rounded-full animate-pulse" />
+            <span className="text-xs text-cyber-grey-light hidden sm:inline">
+              Real-time Sync
             </span>
           </div>
 
@@ -33,21 +33,21 @@ export function Header({ title = 'SyncHub', onLogout = () => {} }) {
           <div className="relative">
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="p-2 hover:bg-synchub-grey hover:bg-opacity-20 rounded-md transition-colors"
+              className="p-2 hover:bg-cyber-blue hover:bg-opacity-10 rounded-md transition-colors"
               aria-label="User menu"
             >
-              <User size={20} className="text-synchub-blue" />
+              <User size={20} className="text-cyber-blue" />
             </button>
 
             {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-synchub-card border border-synchub-grey-lighter border-opacity-30 rounded-lg shadow-xl animate-slide-down">
-                <div className="p-4 border-b border-synchub-grey-lighter border-opacity-20">
-                  <p className="text-sm text-synchub-grey-light">Signed in as</p>
+              <div className="absolute right-0 mt-2 w-48 bg-cyber-charcoal border border-cyber-blue border-opacity-30 rounded-lg shadow-xl shadow-cyber-blue-glow animate-slide-down">
+                <div className="p-4 border-b border-cyber-blue border-opacity-20">
+                  <p className="text-sm text-cyber-grey-light">Signed in as</p>
                   <p className="font-medium text-white">Your Account</p>
                 </div>
                 <div className="p-2 space-y-1">
                   <button
-                    className="w-full flex items-center gap-2 px-4 py-2 hover:bg-synchub-grey hover:bg-opacity-20 rounded transition-colors text-left text-sm"
+                    className="w-full flex items-center gap-2 px-4 py-2 hover:bg-cyber-blue hover:bg-opacity-10 rounded transition-colors text-left text-sm"
                   >
                     <Settings size={16} />
                     Settings

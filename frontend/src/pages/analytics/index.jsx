@@ -10,7 +10,7 @@ const mockAnalytics = [
     label: 'Total Commits',
     value: '156',
     trend: '+12% this week',
-    color: 'text-synchub-blue',
+    color: 'text-cyber-blue',
   },
   {
     icon: Clock,
@@ -58,7 +58,7 @@ export default function Analytics() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Productivity Analytics</h1>
-        <p className="text-synchub-grey-light">Your performance metrics and insights</p>
+        <p className="text-cyber-grey-light">Your performance metrics and insights</p>
       </div>
 
       {/* Stats Grid */}
@@ -68,9 +68,9 @@ export default function Analytics() {
           return (
             <Card key={index} className="flex flex-col items-start">
               <Icon className={`w-8 h-8 ${stat.color} mb-3`} />
-              <p className="text-sm text-synchub-grey-light mb-2">{stat.label}</p>
+              <p className="text-sm text-cyber-grey-light mb-2">{stat.label}</p>
               <p className="text-2xl font-bold text-white mb-2">{stat.value}</p>
-              <p className="text-xs text-synchub-grey">{stat.trend}</p>
+              <p className="text-xs text-cyber-grey">{stat.trend}</p>
             </Card>
           );
         })}
@@ -79,7 +79,7 @@ export default function Analytics() {
       {/* Weekly Activity Chart */}
       <Card className="mb-8">
         <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-          <BarChart3 className="w-5 h-5 text-synchub-blue" />
+          <BarChart3 className="w-5 h-5 text-cyber-blue" />
           Weekly Activity
         </h3>
 
@@ -94,10 +94,10 @@ export default function Analytics() {
                 return (
                   <div key={index} className="flex-1 flex flex-col items-center">
                     <div
-                      className="w-full bg-gradient-to-t from-synchub-blue to-synchub-blue-light rounded-t"
+                      className="w-full bg-gradient-to-t from-cyber-blue to-cyber-blue-light rounded-t"
                       style={{ height: `${height}%`, minHeight: '8px' }}
                     />
-                    <p className="text-xs text-synchub-grey-light mt-2">{data.day}</p>
+                    <p className="text-xs text-cyber-grey-light mt-2">{data.day}</p>
                   </div>
                 );
               })}
@@ -117,7 +117,7 @@ export default function Analytics() {
                       className="w-full bg-gradient-to-t from-green-500 to-green-400 rounded-t"
                       style={{ height: `${height || 2}%`, minHeight: '2px' }}
                     />
-                    <p className="text-xs text-synchub-grey-light mt-2">{data.day}</p>
+                    <p className="text-xs text-cyber-grey-light mt-2">{data.day}</p>
                   </div>
                 );
               })}
@@ -129,28 +129,28 @@ export default function Analytics() {
       {/* Insights */}
       <Card>
         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-synchub-blue" />
+          <TrendingUp className="w-5 h-5 text-cyber-blue" />
           Key Insights
         </h3>
 
         <div className="space-y-3">
           <div className="flex items-start gap-3">
             <Badge variant="success">+12%</Badge>
-            <p className="text-sm text-synchub-grey-light">
+            <p className="text-sm text-cyber-grey-light">
               Your commit activity increased this week. Thursday was your most productive day.
             </p>
           </div>
 
           <div className="flex items-start gap-3">
             <Badge variant="blue">⏱️</Badge>
-            <p className="text-sm text-synchub-grey-light">
+            <p className="text-sm text-cyber-grey-light">
               You spent 28.5 hours in meetings this week. Consider blocking focus time.
             </p>
           </div>
 
           <div className="flex items-start gap-3">
             <Badge variant="success">✓</Badge>
-            <p className="text-sm text-synchub-grey-light">
+            <p className="text-sm text-cyber-grey-light">
               Your productivity score of 92% is excellent. Keep up the great work!
             </p>
           </div>

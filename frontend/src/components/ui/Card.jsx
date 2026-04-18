@@ -10,9 +10,9 @@ export function Card({
   return (
     <div
       className={clsx(
-        'glass-card p-6 rounded-lg',
-        glowing && 'shadow-glow-blue border-synchub-blue border-opacity-50',
-        hover && 'hover:shadow-glow-blue hover:border-synchub-blue hover:border-opacity-50 transition-all duration-300',
+        'p-6 rounded-lg bg-cyber-charcoal/40 backdrop-blur-sm border border-cyber-blue border-opacity-20',
+        glowing && 'shadow-glow-blue border-cyber-blue border-opacity-50',
+        hover && 'hover:shadow-glow-blue hover:border-cyber-blue hover:border-opacity-50 transition-all duration-300',
         className
       )}
       {...props}

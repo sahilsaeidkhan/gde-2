@@ -25,7 +25,7 @@ export function Sidebar() {
       <div className="lg:hidden fixed top-4 left-4 z-40">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="p-2 hover:bg-synchub-card rounded-md transition-colors"
+          className="p-2 hover:bg-cyber-charcoal rounded-md transition-colors"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -34,7 +34,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <nav
         className={clsx(
-          'fixed left-0 top-0 h-screen bg-synchub-card border-r border-synchub-grey-lighter border-opacity-20',
+          'fixed left-0 top-0 h-screen bg-cyber-charcoal border-r border-cyber-blue border-opacity-20',
           'transition-all duration-300 z-30',
           isCollapsed ? 'w-20' : 'w-64',
           'lg:translate-x-0',
@@ -43,20 +43,20 @@ export function Sidebar() {
       >
         {/* Logo */}
         <div className={clsx(
-          'flex items-center justify-between p-6 border-b border-synchub-grey-lighter border-opacity-20',
+          'flex items-center justify-between p-6 border-b border-cyber-blue border-opacity-20',
           isCollapsed && 'justify-center'
         )}>
           {!isCollapsed && (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-synchub-blue rounded-lg flex items-center justify-center font-bold">
+              <div className="w-8 h-8 bg-cyber-blue rounded-lg flex items-center justify-center font-bold text-cyber-black">
                 S
               </div>
-              <span className="font-bold text-lg">SyncHub</span>
+              <span className="font-bold text-lg text-white">SyncHub</span>
             </div>
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:block p-2 hover:bg-synchub-grey-lighter hover:bg-opacity-20 rounded-md transition-colors"
+            className="hidden lg:block p-2 hover:bg-cyber-blue hover:bg-opacity-10 rounded-md transition-colors"
           >
             {isCollapsed ? '→' : '←'}
           </button>
@@ -74,8 +74,8 @@ export function Sidebar() {
                 className={clsx(
                   'flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300',
                   active
-                    ? 'bg-synchub-blue text-white shadow-glow-blue'
-                    : 'text-synchub-grey-light hover:bg-synchub-black hover:bg-opacity-50'
+                    ? 'bg-cyber-blue text-white shadow-glow-blue'
+                    : 'text-cyber-grey-light hover:bg-cyber-charcoal hover:bg-opacity-50'
                 )}
                 title={isCollapsed ? item.label : undefined}
               >

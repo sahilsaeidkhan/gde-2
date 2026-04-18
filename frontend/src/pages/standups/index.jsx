@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 import { AppShell } from '../../components/layout/AppShell';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -66,7 +67,7 @@ export default function Standups() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Daily Standups</h1>
-        <p className="text-synchub-grey-light">Auto-generated from your GitHub activity and meetings</p>
+        <p className="text-cyber-grey-light">Auto-generated from your GitHub activity and meetings</p>
       </div>
 
       {/* Standups */}
@@ -74,13 +75,13 @@ export default function Standups() {
         {mockStandups.map((standup, index) => (
           <Card key={index} className="overflow-hidden">
             {/* Header */}
-            <div className="flex items-start justify-between mb-6 pb-4 border-b border-synchub-grey-lighter border-opacity-20">
+            <div className="flex items-start justify-between mb-6 pb-4 border-b border-cyber-grey-lighter border-opacity-20">
               <div>
                 <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-synchub-blue" />
+                  <FileText className="w-5 h-5 text-cyber-blue" />
                   {standup.dayOfWeek}
                 </h3>
-                <p className="text-sm text-synchub-grey-light mt-1">
+                <p className="text-sm text-cyber-grey-light mt-1">
                   {new Date(standup.date).toLocaleDateString('en-US', {
                     weekday: 'long',
                     month: 'long',
@@ -116,7 +117,7 @@ export default function Standups() {
 
             {/* Content */}
             <div className="prose prose-invert max-w-none">
-              <pre className="monospace text-sm text-synchub-grey-light leading-relaxed overflow-x-auto whitespace-pre-wrap break-words">
+              <pre className="monospace text-sm text-cyber-grey-light leading-relaxed overflow-x-auto whitespace-pre-wrap break-words">
                 {standup.content}
               </pre>
             </div>
