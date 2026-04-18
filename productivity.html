@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProductivityAI — Your Daily Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(233, 69, 96, 0.1) 0%, transparent 50%);
+      animation: rotate 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e94560 0%, #ff6b9d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      color: #a0a0b0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Navigation Tabs */
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tab {
+      background: rgba(26, 26, 46, 0.6);
+      border: 1px solid rgba(233, 69, 96, 0.2);
+      border-radius: 10px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .tab:hover {
+      border-color: rgba(233, 69, 96, 0.5);
+      background: rgba(26, 26, 46, 0.9);
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, #e94560 0%, #ff6b9d 100%);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(233, 69, 96, 0.2);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:hover {
+      border-color: rgba(233, 69, 96, 0.4);
+      box-shadow: 0 12px 48px rgba(233, 69, 96, 0.15);
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #e94560;
+      margin-bottom: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: linear-gradient(180deg, #e94560 0%, #ff6b9d 100%);
+      border-radius: 2px;
+    }
+
+    /* Form elements */
+    label {
+      display: block;
+      font-size: 0.875rem;
+      color: #b0b0c0;
+      margin-bottom: 8px;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    label:first-of-type { margin-top: 0; }
+
+    input, textarea {
+      width: 100%;
+      background: rgba(15, 15, 26, 0.6);
+      border: 1px solid rgba(233, 69, 96, 0.2);
+      border-radius: 10px;
+      color: #e0e0e0;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #e94560;
+      background: rgba(15, 15, 26, 0.8);
+      box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    /* Buttons */
+    .btn {
+      margin-top: 24px;
+      width: 100%;
+      background: linear-gradient(135deg, #e94560 0%, #ff6b9d 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(233, 69, 96, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(233, 69, 96, 0.4);
+    }
+
+    .btn:disabled {
+      background: #3a3a4a;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #e94560;
+      color: #e94560;
+    }
+
+    .btn-secondary:hover {
+      background: #e94560;
+      color: #fff;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Journal Entry */
+    .journal-entry {
+      background: rgba(15, 15, 26, 0.6);
+      border-left: 3px solid #e94560;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .journal-entry .date {
+      color: #e94560;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .journal-entry .content {
+      color: #d0d0d0;
+      line-height: 1.6;
+    }
+
+    /* Calendar Events */
+    .event-item {
+      background: rgba(15, 15, 26, 0.6);
+      border-left: 3px solid #4CAF50;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .event-item .time {
+      color: #4CAF50;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .event-item .title {
+      color: #d0d0d0;
+      margin-top: 4px;
+    }
+
+    /* Reminder Settings */
+    .reminder-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(15, 15, 26, 0.6);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .reminder-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .hidden { display: none; }
+
+    /* Success Message */
+    .success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid #4CAF50;
+      color: #4CAF50;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .error {
+      background: rgba(233, 69, 96, 0.1);
+      border: 1px solid #e94560;
+      color: #ff6b9d;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      color: #606070;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.25rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚀 ProductivityAI</h1>
+      <p class="subtitle">Your AI-powered daily assistant for journaling, planning, and staying on track</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('journal')">📝 Daily Journal</div>
+      <div class="tab" onclick="switchTab('calendar')">📅 Calendar</div>
+      <div class="tab" onclick="switchTab('github')">💻 GitHub Activity</div>
+      <div class="tab" onclick="switchTab('plan')">✨ AI Plan</div>
+      <div class="tab" onclick="switchTab('reminders')">🔔 Reminders</div>
+    </div>
+
+    <!-- Journal Tab -->
+    <div id="journal" class="tab-content active">
+      <div class="card">
+        <div class="section-title">What did you accomplish today?</div>
+        <textarea id="journal-text" placeholder="Write about your day... What did you work on? What challenges did you face? What did you learn?"></textarea>
+        <button class="btn" onclick="saveJournal()">💾 Save Journal Entry</button>
+        <div id="journal-msg" class="hidden"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Recent Entries</div>
+        <div id="journal-list">
+          <p style="color: #808090;">No journal entries yet. Start writing!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar Tab -->
+    <div id="calendar" class="tab-content">
+      <div class="card">
+        <div class="section-title">Connect Your Calendar</div>
+        <p style="color: #a0a0b0; margin-bottom: 20px;">Sync with Google Calendar or Outlook to see your upcoming events</p>
+        
+        <button class="btn" onclick="connectGoogleCalendar()">📅 Connect Google Calendar</button>
+        <button class="btn btn-secondary" onclick="connectOutlook()">📧 Connect Outlook</button>
+        
+        <div id="calendar-msg" class="hidden"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Upcoming Events</div>
+        <div id="events-list">
+          <p style="color: #808090;">Connect your calendar to see events</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub Tab -->
+    <div id="github" class="tab-content">
+      <div class="card">
+        <div class="section-title">GitHub Activity</div>
+        
+        <label>GitHub Username</label>
+        <input type="text" id="gh-username" placeholder="e.g. sahilsaeidkhan" />
+
+        <label>Repository (optional)</label>
+        <input type="text" id="gh-repo" placeholder="Leave blank for all repos" />
+
+        <label>Date</label>
+        <input type="date" id="gh-date" />
+
+        <button class="btn" onclick="fetchGitHubActivity()">🔍 Fetch Activity</button>
+        <div id="gh-msg" class="hidden"></div>
+      </div>
+
+      <div class="card hidden" id="gh-results">
+        <div class="section-title">Your Activity</div>
+        <div id="gh-activity-list"></div>
+      </div>
+    </div>
+
+    <!-- AI Plan Tab -->
+    <div id="plan" class="tab-content">
+      <div class="card">
+        <div class="section-title">Generate Tomorrow's Plan</div>
+        <p style="color: #a0a0b0; margin-bottom: 20px;">AI will analyze your journal, calendar, and GitHub activity to create a personalized plan for tomorrow</p>
+        
+        <button class="btn" onclick="generatePlan()">✨ Generate AI Plan</button>
+        <div id="plan-msg" class="hidden"></div>
+      </div>
+
+      <div class="card hidden" id="plan-output">
+        <div class="section-title">Your Plan for Tomorrow</div>
+        <div id="plan-content" style="background: rgba(15, 15, 26, 0.6); padding: 20px; border-radius: 10px; line-height: 1.8;"></div>
+        <button class="btn btn-secondary" onclick="copyPlan()">📋 Copy Plan</button>
+      </div>
+    </div>
+
+    <!-- Reminders Tab -->
+    <div id="reminders" class="tab-content">
+      <div class="card">
+        <div class="section-title">Notification Settings</div>
+        
+        <div class="reminder-option">
+          <input type="checkbox" id="email-reminder" />
+          <label for="email-reminder" style="margin: 0;">📧 Email Reminders</label>
+        </div>
+
+        <label>Email Address</label>
+        <input type="email" id="email-address" placeholder="your@email.com" />
+
+        <div class="reminder-option" style="margin-top: 20px;">
+          <input type="checkbox" id="whatsapp-reminder" />
+          <label for="whatsapp-reminder" style="margin: 0;">💬 WhatsApp Reminders</label>
+        </div>
+
+        <label>WhatsApp Number</label>
+        <input type="tel" id="whatsapp-number" placeholder="+1234567890" />
+
+        <label>Reminder Time</label>
+        <input type="time" id="reminder-time" value="09:00" />
+
+        <button class="btn" onclick="saveReminders()">💾 Save Settings</button>
+        <div id="reminder-msg" class="hidden"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">What You'll Receive</div>
+        <ul style="color: #a0a0b0; line-height: 2; list-style-position: inside;">
+          <li>📊 Summary of yesterday's accomplishments</li>
+          <li>📅 Today's calendar events</li>
+          <li>✅ AI-generated task list</li>
+          <li>💡 Personalized productivity tips</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      Made with ❤️ for productive developers | <a href="index.html" style="color: #e94560; text-decoration: none;">StandupAI</a>
+    </div>
+  </div>
+
+<script>
+  // Initialize
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('gh-date').value = today;
+
+  // Local Storage Keys
+  const STORAGE = {
+    JOURNAL: 'productivity_journal',
+    GITHUB: 'productivity_github',
+    CALENDAR: 'productivity_calendar',
+    REMINDERS: 'productivity_reminders'
+  };
+
+  // Tab Switching
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    
+    event.target.classList.add('active');
+    document.getElementById(tabName).classList.add('active');
+  }
+
+  // Journal Functions
+  function saveJournal() {
+    const text = document.getElementById('journal-text').value.trim();
+    if (!text) {
+      showMessage('journal-msg', 'Please write something first!', 'error');
+      return;
+    }
+
+    const journals = JSON.parse(localStorage.getItem(STORAGE.JOURNAL) || '[]');
+    journals.unshift({
+      date: new Date().toISOString(),
+      content: text
+    });
+    localStorage.setItem(STORAGE.JOURNAL, JSON.stringify(journals));
+
+    document.getElementById('journal-text').value = '';
+    showMessage('journal-msg', '✅ Journal entry saved!', 'success');
+    loadJournals();
+  }
+
+  function loadJournals() {
+    const journals = JSON.parse(localStorage.getItem(STORAGE.JOURNAL) || '[]');
+    const list = document.getElementById('journal-list');
+    
+    if (journals.length === 0) {
+      list.innerHTML = '<p style="color: #808090;">No journal entries yet. Start writing!</p>';
+      return;
+    }
+
+    list.innerHTML = journals.slice(0, 5).map(j => `
+      <div class="journal-entry">
+        <div class="date">${new Date(j.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+        <div class="content">${j.content}</div>
+      </div>
+    `).join('');
+  }
+
+  // Calendar Functions
+  function connectGoogleCalendar() {
+    showMessage('calendar-msg', '🚧 Google Calendar integration coming soon! This will require backend setup.', 'error');
+  }
+
+  function connectOutlook() {
+    showMessage('calendar-msg', '🚧 Outlook integration coming soon! This will require backend setup.', 'error');
+  }
+
+  // GitHub Functions
+  async function fetchGitHubActivity() {
+    const username = document.getElementById('gh-username').value.trim();
+    const repo = document.getElementById('gh-repo').value.trim();
+    const date = document.getElementById('gh-date').value;
+
+    if (!username) {
+      showMessage('gh-msg', 'Please enter your GitHub username', 'error');
+      return;
+    }
+
+    showMessage('gh-msg', '🔍 Fetching activity...', 'success');
+
+    try {
+      const since = date + 'T00:00:00Z';
+      const until = date + 'T23:59:59Z';
+      const headers = { 'Accept': 'application/vnd.github.cloak-preview+json' };
+      let activityData = [];
+
+      // Fetch commits
+      if (repo) {
+        const res = await fetch(`https://api.github.com/repos/${username}/${repo}/commits?author=${username}&since=${since}&until=${until}&per_page=50`, { headers });
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          data.forEach(c => activityData.push({ type: 'commit', text: c.commit.message.split('\n')[0], repo }));
+        }
+      } else {
+        const res = await fetch(`https://api.github.com/search/commits?q=author:${username}+author-date:${date}&per_page=50`, { headers });
+        const data = await res.json();
+        if (data.items) {
+          data.items.forEach(c => activityData.push({ type: 'commit', text: c.commit.message.split('\n')[0], repo: c.repository.name }));
+        }
+      }
+
+      // Store for AI plan generation
+      localStorage.setItem(STORAGE.GITHUB, JSON.stringify({ date, activity: activityData }));
+
+      // Display
+      const list = document.getElementById('gh-activity-list');
+      if (activityData.length === 0) {
+        list.innerHTML = '<p style="color: #808090;">No activity found for this date</p>';
+      } else {
+        list.innerHTML = activityData.map(a => `
+          <div class="journal-entry">
+            <div class="date">💾 ${a.repo}</div>
+            <div class="content">${a.text}</div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('gh-results').classList.remove('hidden');
+      showMessage('gh-msg', `✅ Found ${activityData.length} activities`, 'success');
+    } catch (e) {
+      showMessage('gh-msg', '❌ Failed to fetch GitHub activity', 'error');
+    }
+  }
+
+  // AI Plan Generation
+  async function generatePlan() {
+    showMessage('plan-msg', '✨ Generating your personalized plan...', 'success');
+
+    // Gather data
+    const journals = JSON.parse(localStorage.getItem(STORAGE.JOURNAL) || '[]');
+    const github = JSON.parse(localStorage.getItem(STORAGE.GITHUB) || '{}');
+    
+    if (journals.length === 0 && !github.activity) {
+      showMessage('plan-msg', '⚠️ Add some journal entries or GitHub activity first!', 'error');
+      return;
+    }
+
+    // Build context
+    let context = 'Generate a plan for tomorrow based on:\n\n';
+    
+    if (journals.length > 0) {
+      context += 'Recent Journal Entries:\n';
+      journals.slice(0, 3).forEach(j => {
+        context += `- ${j.content.substring(0, 200)}\n`;
+      });
+    }
+
+    if (github.activity) {
+      context += '\nRecent GitHub Activity:\n';
+      github.activity.slice(0, 10).forEach(a => {
+        context += `- ${a.text}\n`;
+      });
+    }
+
+    context += '\nCreate a concise, actionable plan for tomorrow with 3-5 key tasks.';
+
+    try {
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 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',
+          'HTTP-Referer': window.location.href,
+          'X-Title': 'ProductivityAI'
+        },
+        body: JSON.stringify({
+          model: 'google/gemini-2.0-flash-exp:free',
+          messages: [{ role: 'user', content: context }],
+          temperature: 0.7,
+          max_tokens: 500
+        })
+      });
+
+      const data = await response.json();
+      const plan = data.choices[0].message.content.trim();
+
+      document.getElementById('plan-content').textContent = plan;
+      document.getElementById('plan-output').classList.remove('hidden');
+      showMessage('plan-msg', '✅ Plan generated!', 'success');
+    } catch (e) {
+      showMessage('plan-msg', '❌ Failed to generate plan', 'error');
+    }
+  }
+
+  function copyPlan() {
+    const text = document.getElementById('plan-content').textContent;
+    navigator.clipboard.writeText(text);
+    showMessage('plan-msg', '📋 Copied to clipboard!', 'success');
+  }
+
+  // Reminder Functions
+  function saveReminders() {
+    const settings = {
+      email: {
+        enabled: document.getElementById('email-reminder').checked,
+        address: document.getElementById('email-address').value
+      },
+      whatsapp: {
+        enabled: document.getElementById('whatsapp-reminder').checked,
+        number: document.getElementById('whatsapp-number').value
+      },
+      time: document.getElementById('reminder-time').value
+    };
+
+    localStorage.setItem(STORAGE.REMINDERS, JSON.stringify(settings));
+    showMessage('reminder-msg', '✅ Settings saved! Note: Backend integration needed for actual notifications.', 'success');
+  }
+
+  // Helper Functions
+  function showMessage(id, text, type) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = type;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 5000);
+  }
+
+  // Load on start
+  loadJournals();
+</script>
+</body>
+</html>
